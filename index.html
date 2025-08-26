@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>تغذية الإبل الذكية</title>
+  <meta name="theme-color" content="#f6efe2" />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <button id="homeBtn" class="icon-btn" title="الرئيسية">🏠</button>
+      <div class="brand-title">
+        <strong>تغذية الإبل الذكية</strong>
+        <span>تعلّم الأساسيات • استكشف بطاقات الأعلاف • صمّم خلطة مثالية • جرّبها في السباق</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button id="fsBtn" class="chip" aria-label="ملء الشاشة">⛶</button>
+    </div>
+  </header>
+
+  <nav class="stepper" aria-label="مراحل التعلّم">
+    <div class="step active"><span>الترحيب</span></div>
+    <div class="arrow">←</div>
+    <div class="step"><span>اختيار الحيوان</span></div>
+    <div class="arrow">←</div>
+    <div class="step"><span>الدروس</span></div>
+    <div class="arrow">←</div>
+    <div class="step"><span>بطاقات الأعلاف</span></div>
+    <div class="arrow">←</div>
+    <div class="step"><span>صمّم الخلطة</span></div>
+    <div class="arrow">←</div>
+    <div class="step"><span>سباق الهجن</span></div>
+  </nav>
+
+  <main>
+    <!-- 1) الترحيب -->
+    <section id="home" class="screen active">
+      <div class="screen-content center">
+        <div class="hero card">
+          <h1 class="headline">غذّي إبلك بذكاء</h1>
+          <p class="tagline">تعلّم الأساسيات بسرعة، استكشف بطاقات الأعلاف المفيدة، وصمّم خلطة متوازنة ثم اختبرها في سباق الهجن.</p>
+          <button id="startBtn" class="btn primary xl">ابدأ الآن</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2) اختيار الحيوان -->
+    <section id="pick" class="screen">
+      <div class="screen-content center">
+        <h2 class="title">اختر الحيوان</h2>
+        <div class="animal-grid">
+          <button id="pick-camel" class="animal-card card">
+            <div class="big-emoji">🐪</div>
+            <div class="info">
+              <div class="name">الإبل</div>
+              <div class="badge good">متاح</div>
+            </div>
+          </button>
+          <div class="animal-card card locked" aria-disabled="true">
+            <div class="big-emoji">🐑</div><div class="info"><div class="name">الأغنام</div><div class="badge">قريبًا</div></div>
+          </div>
+          <div class="animal-card card locked" aria-disabled="true">
+            <div class="big-emoji">🐐</div><div class="info"><div class="name">الماعز</div><div class="badge">قريبًا</div></div>
+          </div>
+          <div class="animal-card card locked" aria-disabled="true">
+            <div class="big-emoji">🐄</div><div class="info"><div class="name">الأبقار</div><div class="badge">قريبًا</div></div>
+          </div>
+        </div>
+        <div class="nav-row sticky-actions">
+          <button class="btn ghost lg" data-go="home">رجوع</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3) الدروس -->
+    <section id="lesson" class="screen">
+      <div class="screen-content center">
+        <h2 class="title">الدروس التمهيدية التفاعلية</h2>
+        <div id="lessonSlider" class="mag-slider"><div id="lessonTrack" class="mag-track"></div></div>
+        <div class="mag-controls">
+          <button id="prevSlide" class="btn ghost lg">السابق</button>
+          <div class="dots" id="lessonDots"></div>
+          <button id="nextSlide" class="btn primary lg">التالي</button>
+        </div>
+        <div class="nav-row sticky-actions">
+          <button class="btn ghost lg" data-go="pick">رجوع</button>
+          <div class="spacer"></div>
+          <button id="toFeeds" class="btn accent lg">افتح بطاقات الأعلاف</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4) بطاقات الأعلاف -->
+    <section id="feeds" class="screen">
+      <div class="screen-content center">
+        <h2 class="title">بطاقات الأعلاف</h2>
+        <div class="nav-row feed-toolbar">
+          <button id="prevFeed" class="btn ghost lg">السابق</button>
+          <button id="toMixer" class="btn accent lg">إلى «صمّم الخلطة»</button>
+          <button id="nextFeed" class="btn primary lg">التالي</button>
+        </div>
+        <div id="feedCard" class="feed card"></div>
+      </div>
+    </section>
+
+    <!-- 5) مصمّم الخلطة (٣ أعمدة) -->
+    <section id="mixer" class="screen">
+      <div class="screen-content start">
+        <h2 class="title">صمّم خلطة الإبل</h2>
+
+        <div class="mixer-grid">
+          <!-- العمود 1: قائمة المكوّنات (عمود واحد) -->
+          <aside class="palette card tight">
+            <div class="palette-head">
+              <h3>أضف مكونات</h3>
+              <input id="feedSearch" type="search" placeholder="ابحث عن علف..." />
+            </div>
+            <div id="paletteList" class="palette-list"></div>
+          </aside>
+
+          <!-- العمود 2: الأعلاف المضافة -->
+          <section class="selected-wrap card tight">
+            <div id="selectedList" class="selected"></div>
+          </section>
+
+          <!-- العمود 3: الدائرة + المؤشرات -->
+          <aside class="stats card tight">
+            <div class="chart-box">
+              <svg id="blendChart" viewBox="0 0 240 240" width="240" height="240" aria-label="تركيب الخلطة"></svg>
+              <div class="chart-center">
+                <div id="blendTotal">0%</div>
+                <small>إجمالي الخلطة</small>
+              </div>
+            </div>
+            <div class="metrics">
+              <div class="metric"><span>البروتين</span><strong id="outProtein">—</strong><small id="protGuide"></small></div>
+              <div class="metric"><span>الألياف</span><strong id="outFiber">—</strong><small id="fiberGuide"></small></div>
+              <div class="metric"><span>الطاقة (مؤشر)</span><strong id="outEnergy">—</strong><small id="energyGuide"></small></div>
+              <div class="metric"><span>محلي</span><strong id="outLocal">—</strong></div>
+            </div>
+            <ul id="warnings" class="warnings"></ul>
+            <div class="mix-actions">
+              <button id="tryBlend" class="btn primary lg">جرب الخلطة</button>
+              <button id="resetBlend" class="btn ghost lg">إعادة ضبط</button>
+            </div>
+          </aside>
+        </div>
+
+        <div class="nav-row sticky-actions">
+          <button class="btn ghost lg" data-go="feeds">رجوع</button>
+          <div class="spacer"></div>
+          <button class="btn accent lg" data-go="quiz">التالي: سباق الهجن</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- مودال التذوّق -->
+    <div id="tasteModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="tasteTitle">
+      <div class="modal-content card">
+        <button class="close" id="closeTaste" aria-label="إغلاق">✕</button>
+        <h3 id="tasteTitle">الجمل يجرّب الخلطة…</h3>
+        <div class="taste">
+          <div class="camel">🐪</div>
+          <div id="tasteVerdict" class="verdict"></div>
+          <ul id="tasteTips" class="benefits"></ul>
+        </div>
+        <div class="modal-actions"><button id="tasteOk" class="btn primary lg">تمام</button></div>
+      </div>
+    </div>
+
+    <!-- 6) سباق الهجن (المضمار فوق السؤال) -->
+    <section id="quiz" class="screen">
+      <div class="screen-content start">
+        <h2 class="title">سباق الهجن</h2>
+
+        <div class="quiz-stack">
+          <!-- المضمار أولاً: العلم يسار، الجمل يمين -->
+          <div class="track card">
+            <div class="finish left-flag">🏁</div>
+            <div id="camel" class="camel">🐪</div>
+          </div>
+
+          <!-- السؤال تحت المضمار بثبات ارتفاع مناسب -->
+          <div id="quizBox" class="quiz card"></div>
+        </div>
+
+        <div class="nav-row">
+          <button id="startQuiz" class="btn primary lg">ابدأ التحدي</button>
+          <button id="resetQuiz" class="btn ghost lg">إعادة</button>
+          <div class="spacer"></div>
+          <button class="btn ghost lg" data-go="mixer">رجوع</button>
+        </div>
+        <div id="quizScore" class="score sub"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast top" role="status" aria-live="polite"></div>
+  <footer class="site-footer"><small>© 2025  نسخة عرض تعليمية. البيانات تقريبية للأغراض التوعوية وليست بديلاً عن الاستشارة البيطرية.</small></footer>
+  <script src="app.js"></script>
+</body>
+</html>
