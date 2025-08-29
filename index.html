@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>مرعى — اللعبة التعليمية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Vazirmatn:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="home-bg">
+  <!-- هيدر شفاف ومثبت -->
+  <header class="topbar">
+    <button id="fsBtn" class="icon-btn area-left" title="ملء الشاشة" aria-label="ملء الشاشة">⛶</button>
+    <img id="topLogo" class="top-logo area-center" src="Images/logo.png" alt="مرعى" />
+    <button id="backBtn" class="icon-btn area-right" title="رجوع" aria-label="رجوع">↩</button>
+  </header>
+
+  <!-- الرئيسية -->
+  <section id="home" class="screen active home-screen">
+    <div class="center-middle">
+      <img class="logo logo-float" src="Images/logo.png" alt="شعار مرعى" />
+      <button id="startBtn" class="img-btn blue pulse big-start" type="button" data-go="pick">ابدأ</button>
+    </div>
+  </section>
+
+  <!-- اختر الحيوان -->
+  <section id="pick" class="screen" hidden>
+    <div class="wrap">
+      <h2 class="title">اختر الحيوان</h2>
+      <div class="animal-grid two-by-two">
+        <button id="pick-camel" class="animal-card card" data-go="lesson">
+          <span class="chip chip-good">متاح</span>
+          <img src="Images/Camel.png" alt="الإبل" class="animal-img"/>
+          <div class="name">الإبل</div>
+        </button>
+
+        <div class="animal-card card locked">
+          <span class="chip">قريبًا</span>
+          <img src="Images/Sheep.png" alt="الأغنام" class="animal-img"/>
+          <div class="name">الأغنام</div>
+        </div>
+
+        <div class="animal-card card locked">
+          <span class="chip">قريبًا</span>
+          <img src="Images/Goat.png" alt="الماعز" class="animal-img"/>
+          <div class="name">الماعز</div>
+        </div>
+
+        <div class="animal-card card locked">
+          <span class="chip">قريبًا</span>
+          <img src="Images/Cow.png" alt="الأبقار" class="animal-img"/>
+          <div class="name">الأبقار</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- الدروس التمهيدية -->
+  <section id="lesson" class="screen" hidden>
+    <div class="wrap">
+      <h2 class="title">الدروس التمهيدية</h2>
+
+      <!-- زر صغير ثابت أعلى يسار -->
+      <div class="cta-img small fixed-left" data-go="feeds" role="button" tabindex="0">
+        <img src="Images/Forages-Button.png" alt="Forages" class="cta-imgbtn" />
+        <div class="btn-caption black">إلى قسم الأعلاف</div>
+      </div>
+
+      <div id="lessonGrid" class="grid-lesson"></div>
+    </div>
+
+    <!-- مودال تفاصيل الدرس -->
+    <div id="lessonModal" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modal-content card" role="document">
+        <button class="close btn flat sm" data-close>إغلاق</button>
+        <h3 id="lmTitle" class="mb8"></h3>
+        <ul id="lmPoints" class="list"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- بطاقات الأعلاف -->
+  <section id="feeds" class="screen" hidden>
+    <div class="wrap">
+      <h2 class="title">بطاقات الأعلاف</h2>
+
+      <!-- زر صغير ثابت أعلى يسار -->
+      <div class="cta-img small fixed-left" data-go="mixer" role="button" tabindex="0">
+        <img src="Images/Mixer-Design-Button.png" alt="Mixer" class="cta-imgbtn" />
+        <div class="btn-caption">إلى مصمّم الخلطة</div>
+      </div>
+
+      <div id="feedGrid" class="feed-grid"></div>
+    </div>
+
+    <!-- مودال تفاصيل العلف -->
+    <div id="feedModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="feedModalTitle">
+      <div class="modal-content card feed-detail" role="document">
+        <button class="close btn flat sm" data-close>إغلاق</button>
+        <div class="fd-head">
+          <img id="fdImg" alt="" />
+          <div>
+            <h3 id="feedModalTitle" class="fd-name"></h3>
+            <div id="fdLatin" class="fd-latin"></div>
+            <div id="fdTags" class="fd-tags"></div>
+          </div>
+        </div>
+        <div class="fd-grid">
+          <div class="fd-col">
+            <div class="section-title sec-specs">المواصفات</div>
+            <div id="fdSpecs" class="specs"></div>
+
+            <div class="section-title sec-sci mt8">مختصر علمي</div>
+            <ul id="fdSci" class="list"></ul>
+
+            <div id="fdDoseWrap" class="mt8"></div>
+          </div>
+          <div class="fd-col">
+            <div class="section-title sec-benefits">فوائد</div>
+            <ul id="fdBenefits" class="list"></ul>
+
+            <div class="section-title sec-risks mt8">سلبيات/محاذير</div>
+            <ul id="fdRisks" class="list"></ul>
+
+            <div class="section-title sec-info mt8">نصائح استخدام</div>
+            <ul id="fdInfo" class="list"></ul>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button id="fdOk" class="btn primary sm" type="button">تم</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- المصمّم -->
+  <section id="mixer" class="screen" hidden>
+    <div class="wrap">
+      <h2 class="title">صمّم خلطة الإبل</h2>
+
+      <div class="mixer-grid">
+        <!-- يمين: المكوّنات بصور (قائمة عادية) -->
+        <aside class="palette card tight">
+          <h3 class="sec-ttl">المكوّنات</h3>
+          <div id="paletteList" class="palette-list grid2"></div>
+        </aside>
+
+        <!-- يسار: نسب + مخطط + تحذيرات -->
+        <section class="selected-wrap card">
+          <h3 class="sec-ttl">نِسَب الخلطة</h3>
+          <div id="selectedList" class="selected"></div>
+
+          <div class="stats">
+            <div class="chart-box">
+              <svg id="blendChart" viewBox="0 0 240 240" width="240" height="240"></svg>
+              <div class="chart-center">
+                <div id="blendTotal">0%</div>
+                <small>إجمالي الخلطة</small>
+              </div>
+            </div>
+            <div class="metrics">
+              <div class="metric"><span>البروتين</span><strong id="outProtein">—</strong><small id="protGuide"></small></div>
+              <div class="metric"><span>الألياف</span><strong id="outFiber">—</strong><small id="fiberGuide"></small></div>
+              <div class="metric"><span>الطاقة</span><strong id="outEnergy">—</strong><small id="energyGuide"></small></div>
+              <div class="metric"><span>محلي</span><strong id="outLocal">—</strong></div>
+            </div>
+            <ul id="warnings" class="warnings"></ul>
+
+            <div class="mix-actions">
+              <button id="tryBlend" class="img-btn white black-text" type="button">جرب الخلطة</button>
+              <button id="resetBlend" class="btn flat sm" type="button">إعادة ضبط</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- تذوق -->
+      <div id="tasteModal" class="modal hidden" role="dialog" aria-modal="true">
+        <div class="modal-content card taste-card" role="document">
+          <button class="close btn flat sm" data-close>إغلاق</button>
+          <h3 id="tasteTitle">الجمل يجرّب الخلطة…</h3>
+          <div class="taste">
+            <img class="taste-camel" src="Images/Camel-Eating.png" alt="جمل يتذوق" />
+            <div class="taste-info">
+              <div id="tasteVerdict" class="verdict"></div>
+              <ul id="tasteTips" class="list"></ul>
+            </div>
+          </div>
+          <div class="modal-actions">
+            <button id="tasteOk" class="btn primary sm" type="button">تم</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- زر صغير ثابت أعلى يسار للسباق -->
+      <div class="cta-img small fixed-left" data-go="raceSetup" role="button" tabindex="0">
+        <img src="Images/Camel-Race-Button.png" alt="Race" class="cta-imgbtn" />
+        <div class="btn-caption">إلى سباق الهجن</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- إعداد السباق -->
+  <section id="raceSetup" class="screen" hidden>
+    <div class="wrap">
+      <h2 class="title">جهّز جملك</h2>
+      <div class="race-setup card">
+        <div class="columns">
+          <div class="col">
+            <label class="lbl">اسم الجمل</label>
+            <input id="camelName" class="text" type="text" maxlength="12" placeholder="مثال: برق" />
+            <small class="hint">سيظهر الاسم فوق جملك أثناء السباق.</small>
+          </div>
+          <div class="col">
+            <label class="lbl">اختر اللون</label>
+            <div id="camelColors" class="camel-colors"></div>
+          </div>
+        </div>
+        <div class="preview">
+          <div class="preview-title">معاينة</div>
+          <div class="preview-box small">
+            <img id="previewCamel" src="Images/Blue-Camel.png" alt="معاينة الجمل" />
+            <div id="previewName" class="name-tag">برق</div>
+          </div>
+        </div>
+        <div class="fixed-cta">
+          <button id="startRace" class="btn black" type="button">ابدأ التحدي</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- السباق -->
+  <section id="race" class="screen race-screen" hidden>
+    <div class="wrap">
+      <h2 class="title">سباق الهجن</h2>
+
+      <div class="track card race-bg">
+        <div class="lanes" id="lanes"></div>
+        <button id="startChallenge" class="start-overlay btn black xl" type="button">ابدأ التحدي</button>
+      </div>
+
+      <div id="quizBox" class="quiz hidden"></div>
+
+      <div class="fixed-cta gap">
+        <button id="resetQuiz" class="btn flat sm" type="button">إعادة</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <small>© 2025 نسخة عرض تعليمية. البيانات تقريبية للأغراض التوعوية وليست بديلاً عن الاستشارة البيطرية. تم صناعة النموذج بواسطة سيف العلوي وذياب الكتبي.</small>
+  </footer>
+
+  <div id="toast" class="toast top" role="status" aria-live="polite"></div>
+  <script defer src="app.js"></script>
+</body>
+</html>
